@@ -31,7 +31,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <li><a href="http://localhost/php_bookstore/admin/orders" class="nav-link <?= ($current_page == 'orders' || $current_page == 'edit_publisher') ? 'active' : '' ?>"><i class="bi bi-house-down-fill"></i> Orders</a></li>
         <?php if (isset($username)): ?>
           <li><a href="http://localhost/php_bookstore/user/logout" class="nav-link"><button class="danger"><i class="bi bi-box-arrow-right"></i> Logout</button></a></li>
-
           <li> <button class="success">Hi, <?= $username ?> <i class="bi bi-person-square" style="font-size: larger;"></i> </button></li>
         <?php else: ?>
           <li><a href="http://localhost/php_bookstore/user/login" class="nav-link"><button class="success"><i class="bi bi-box-arrow-in-right"></i> Login</button></a></li>
@@ -57,8 +56,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
       <a href="http://localhost/php_bookstore/admin/orders" class="nav-link <?= ($current_page == 'orders' || $current_page == 'edit_publisher') ? 'active' : '' ?>"><i class="bi bi-house-down-fill"></i> Orders</a>
 
 
-      <?php if (!isset($username)): ?>
-        <a href="http://localhost/php_bookstore/user/login"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+      <?php if (isset($username)): ?>
+        <a href="http://localhost/php_bookstore/user/logout" class="nav-link"><button class="danger"><i class="bi bi-box-arrow-right"></i> Logout</button></a>
+      <?php else: ?>
+        <a href="http://localhost/php_bookstore/user/login" class="nav-link"><button class="success"><i class="bi bi-box-arrow-in-right"></i> Login</button></a>
       <?php endif ?>
     </div>
     <!-- sidebar -->
