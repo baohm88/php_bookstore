@@ -2,7 +2,7 @@
 $categories = $data['categories'];
 ?>
 
-<h2 class="center">List of Categories</h2>
+<h1 class="center">List of Categories</h1>
 <br>
 
 <button class="success" onclick="addNewCategory()"><i class="bi bi-plus-lg"></i> Add New Category</button>

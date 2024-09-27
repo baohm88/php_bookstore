@@ -4,7 +4,7 @@ $orderStatusOptions = $data['orderStatusOptions'];
 
 ?>
 
-<h2 class="center">List of User Orders</h2>
+<h1 class="center">List of User Orders</h1>
 <br>
 
 <br>

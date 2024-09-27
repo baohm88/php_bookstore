@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<h2 class="center">List of Books</h2>
+<h1 class="center">List of Books</h1>
 <br>
 
 <button class="success" onclick="addNewBook()"><i class="bi bi-plus-lg"></i> Add New Book</button>

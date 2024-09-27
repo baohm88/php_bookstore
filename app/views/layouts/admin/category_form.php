@@ -9,9 +9,7 @@ if (isset($data['error'])) {
 
 <h1 class="center"><?= $data['page_title'] ?></h1>
 
-<button class="success" onclick="backToCategoriesList()">Back to Categories List</button>
-<!-- <button class="success"><a href="http://localhost/shop/admin/categories">Back to Categories List</a></button> -->
-
+<button class="success" onclick="backToCategoriesList()"><i class="bi bi-chevron-left"></i> Back to Categories List</button>
 
 <form method="POST" class="book-form">
   <span class="error-message"><?= $error ?? '' ?></span>

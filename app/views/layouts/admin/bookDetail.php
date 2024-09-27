@@ -6,8 +6,6 @@ $book = $data['book'];
 <h1 class="center">Book Detail Page</h1>
 <button class="success" onclick="backToBooksList()"><i class="bi bi-chevron-left"></i> Back to Books List</button>
 
-<!-- <button class="button-12"><a href="http://localhost/php_bookstore/admin">Back to Books List</a></button> -->
-
 <div class="book-container">
   <div>
     <img src="<?= $book->image_url ?>" alt="<?= $book->title ?>" class="book-image-detail">
