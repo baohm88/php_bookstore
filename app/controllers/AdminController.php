@@ -17,11 +17,11 @@ class AdminController extends BaseController
     $data['page_title'] = 'Books Page';
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // filter books
-      $name = trim($_POST['name']);
+      $title = trim($_POST['title']);
       $stock_qty = trim($_POST['stock_qty']);
       $price_in = trim($_POST['price_in']);
       $price_out = trim($_POST['price_out']);
-      $data['books'] = $this->__bookModel->filterBooks($name, $stock_qty, $price_in, $price_out);
+      $data['books'] = $this->__bookModel->filterBooks($title, $stock_qty, $price_in, $price_out);
     } else {
       // show all books
       $data['books'] = $this->__bookModel->getAllBooks();
@@ -74,10 +74,10 @@ class AdminController extends BaseController
       $author = trim($_POST['author']);
       $description = trim($_POST['description']);
       $category_id = trim($_POST['category_id']);
-      $price_in = $_POST['price_in'];
-      $price_out = $_POST['price_out'];
-      $stock_qty = $_POST['stock_qty'];
-      $image_url = $_POST['image_url'];
+      $price_in = trim($_POST['price_in']);
+      $price_out = trim($_POST['price_out']);
+      $stock_qty = trim($_POST['stock_qty']);
+      $image_url = trim($_POST['image_url']);
       $id = $_POST['id'];
       if ($id > 0) {
         // update book by id
@@ -122,8 +122,8 @@ class AdminController extends BaseController
   function update_category()
   {
     // get id, name
-    $id = $_REQUEST['id'];
-    $name = $_REQUEST['name'];
+    $id = trim($_REQUEST['id']);
+    $name = trim($_REQUEST['name']);
 
     // update category by id
     $this->__categoryModel->updateCategoryById($id, $name);
@@ -140,7 +140,7 @@ class AdminController extends BaseController
       if (isset($_REQUEST['id'])) {
         // edit
         $data['page_title'] = 'Edit Category';
-        $categoryId = $_REQUEST['id'];
+        $categoryId = trim($_REQUEST['id']);
         if (!$categoryId > 0) {
           $data['error'] = 'Wrong Category ID. please enter a valid Category ID';
           $data['category'] = '';
@@ -161,8 +161,8 @@ class AdminController extends BaseController
       $this->view('admin/layoutAdmin.php', $data);
     } else {
       // method = POST -> collect POST data
-      $name = $_POST['name'];
-      $id = $_POST['id'];
+      $name = trim($_POST['name']);
+      $id = trim($_POST['id']);
       if ($id > 0) {
         // update category by id
         $this->__categoryModel->updateCategoryById($id, $name);
@@ -178,7 +178,7 @@ class AdminController extends BaseController
 
   function delete_category()
   {
-    $categoryId = $_REQUEST['id'];
+    $categoryId = trim($_REQUEST['id']);
     $data['category'] = $this->__categoryModel->deleteCategoryById($categoryId);
     header("Location: http://localhost/php_bookstore/admin/categories");
   }
@@ -193,12 +193,12 @@ class AdminController extends BaseController
     $data['orderStatusOptions'] = ['pending', 'completed', 'canceled'];
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      // filter orders
+      // filter orders for display
       $name = trim($_POST['name']);
       $dob = trim($_POST['dob']);
       $data['orders'] = $this->__orderModel->filterOrders($name, $dob);
     } else {
-      // show all orders
+      // fetch all orders for display
       $data['orders'] = $this->__orderModel->getAllOrders();
     }
     $this->view("admin/layoutAdmin.php", $data);
@@ -207,12 +207,8 @@ class AdminController extends BaseController
   function update_order_status()
   {
     $id = trim($_REQUEST['id']);
-    $status = trim($_REQUEST['status']);
-
+    $status = trim($_REQUEST['status']); 
     $this->__orderModel->updateOrderStatus($id, $status);
-    show_data($id);
-    show_data($status);
-    // die();
     header("Location: http://localhost/php_bookstore/admin/orders");
   }
 

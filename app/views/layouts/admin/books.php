@@ -3,7 +3,7 @@ $books = $data['books'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // filter books
-  $name = trim($_POST['name']);
+  $title = trim($_POST['title']);
   $stock_qty = trim($_POST['stock_qty']);
   $price_in = trim($_POST['price_in']);
   $price_out = trim($_POST['price_out']);
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="center">
   <form method="POST">
-    <input type="text" name="name" placeholder="Book Name" value="<?= !empty($name) ? $name : '' ?>">
+    <input type="text" name="title" placeholder="Book Title" value="<?= !empty($title) ? $title : '' ?>" autofocus>
     <input type="number" name="stock_qty" placeholder="Stock Qty" value="<?= !empty($stock_qty) ? $stock_qty : '' ?>">
     <input type="number" name="price_in" placeholder="Price In" value="<?= !empty($price_in) ? $price_in : '' ?>">
     <input type="number" name="price_out" placeholder="Price Out" value="<?= !empty($price_out) ? $price_out : '' ?>">
