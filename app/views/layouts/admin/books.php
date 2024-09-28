@@ -2,13 +2,16 @@
 $books = $data['books'];
 $totalPages = $data['totalPages'];
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$currentPage = $data['currentPage'];
+$index = $data['startIndex'];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = trim($_POST['title']);
-    $stock_qty = trim($_POST['stock_qty']);
-    $price_in = trim($_POST['price_in']);
-    $price_out = trim($_POST['price_out']);
-}
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+// }
+$title = isset($_GET['title']) ? trim($_GET['title']) : '';
+$stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
+$price_in = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';
+$price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
 
 // show_data($_SERVER);
 ?>
@@ -20,20 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <br>
 
 <div class="center">
-    <!-- <form method="POST" action="http://localhost/php_bookstore/admin/search/">
-        <input type="text" name="title" placeholder="Book Title" value="<?= !empty($title) ? $title : '' ?>" autofocus>
-        <input type="number" name="stock_qty" placeholder="Stock Qty" value="<?= !empty($stock_qty) ? $stock_qty : '' ?>">
-        <input type="number" name="price_in" placeholder="Price In" value="<?= !empty($price_in) ? $price_in : '' ?>">
-        <input type="number" name="price_out" placeholder="Price Out" value="<?= !empty($price_out) ? $price_out : '' ?>">
-        <button type="submit" class="success">Search</button>
-    </form> -->
-
-    <form method="POST" action="">
+    <form method="GET" action="">
         <input type="text" name="title" value="<?php echo isset($title) ? htmlspecialchars($title) : ''; ?>" placeholder="Title">
         <input type="number" name="stock_qty" value="<?php echo isset($stock_qty) ? htmlspecialchars($stock_qty) : ''; ?>" placeholder="Stock Quantity">
         <input type="number" name="price_in" value="<?php echo isset($price_in) ? htmlspecialchars($price_in) : ''; ?>" placeholder="Price In">
         <input type="number" name="price_out" value="<?php echo isset($price_out) ? htmlspecialchars($price_out) : ''; ?>" placeholder="Price Out">
-        <button type="submit" class="success">Filter</button>
+        <button type="submit" class="success">Search</button>
     </form>
 </div>
 
@@ -51,9 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <th colspan="3" class="center">Actions</th>
             </tr>
 
-            <?php foreach ($books as $book): ?>
+            <?php
+            // $index = 1 + ($currentPage - 1) * 2; // Cập nhật STT theo trang
+            foreach ($books as $book): ?>
                 <tr>
-                    <td><?= $book->id ?></td>
+                    <td><?= $index++ ?></td>
                     <td><?= $book->title ?></td>
                     <td><?= $book->stock_qty ?></td>
                     <td>$<?= number_format($book->price_in, 2, '.', ',') ?></td>
@@ -76,20 +73,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!-- Pagination Links -->
 <div class="center">
     <?php if ($page > 1): ?>
-        <a href="http://localhost/php_bookstore/admin/?page=<?php echo $page - 1; ?>"><i class="bi bi-caret-left-fill" style="font-weight: 900;"></i></a>
+        <a href="http://localhost/php_bookstore/admin/?page=<?php echo $page - 1; ?>&title=<?php echo urlencode($title); ?>&stock_qty=<?php echo urlencode($stock_qty); ?>&price_in=<?php echo urlencode($price_in); ?>&price_out=<?php echo urlencode($price_out); ?>">
+            <i class="bi bi-caret-left-fill" style="font-weight: 900;"></i>
+        </a>
     <?php endif; ?>
 
     Page <?php echo $page; ?> of <?php echo $totalPages; ?>
 
     <?php if ($page < $totalPages): ?>
-        <a href="http://localhost/php_bookstore/admin/?page=<?php echo $page + 1; ?>"><i class="bi bi-caret-right-fill" style="font-weight: 900;"></i></a>
+        <a href="http://localhost/php_bookstore/admin/?page=<?php echo $page + 1; ?>&title=<?php echo urlencode($title); ?>&stock_qty=<?php echo urlencode($stock_qty); ?>&price_in=<?php echo urlencode($price_in); ?>&price_out=<?php echo urlencode($price_out); ?>">
+            <i class="bi bi-caret-right-fill" style="font-weight: 900;"></i>
+        </a>
     <?php endif; ?>
-</div>
-
-
-<!-- Phân trang -->
-<div class="center">
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="http://localhost/php_bookstore/admin/?page=<?= $i ?>"><?= $i ?></a>
-    <?php endfor; ?>
 </div>

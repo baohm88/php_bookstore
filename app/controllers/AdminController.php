@@ -13,81 +13,43 @@ class AdminController extends BaseController
     // BOOKS CONTROLLER
     public function index()
     {
-        // $data['page'] = 'admin/books.php';
-        // $data['page_title'] = 'Books Page';
-
         // Pagination variables
-        $limit = 10; // Number of books per page
+        $limit = 3; // Number of books per page
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $limit;
+        $startIndex = $offset + 1;  // This gives the index of the first item on the current page.
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // filter books
-            $title = trim($_POST['title']);
-            $stock_qty = trim($_POST['stock_qty']);
-            $price_in = trim($_POST['price_in']);
-            $price_out = trim($_POST['price_out']);
-            $books = $this->__bookModel->filterBooks($title, $stock_qty, $price_in, $price_out, $limit, $offset);
-            $totalBooks = $this->__bookModel->countFilteredBooks($title, $stock_qty, $price_in, $price_out);
+
+        // Check if filters are applied
+        $title = isset($_GET['title']) ? trim($_GET['title']) : '';
+        $stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
+        $price_in = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';
+        $price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
+
+        // Fetch filtered books or all books based on whether filters are applied
+        if ($title || $stock_qty || $price_in || $price_out) {
+            $data['books'] = $this->__bookModel->filterBooks($title, $stock_qty, $price_in, $price_out, $limit, $offset);
+            $data['totalBooks'] = $this->__bookModel->countFilteredBooks($title, $stock_qty, $price_in, $price_out);
         } else {
-            // Check for filter parameters in the URL
-            $title = isset($_GET['title']) ? trim($_GET['title']) : '';
-            $stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
-            $price_in = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';
-            $price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
-
-            if ($title || $stock_qty || $price_in || $price_out) {
-                // If any filter parameter is present, use them to filter books
-                $books = $this->__bookModel->filterBooks($title, $stock_qty, $price_in, $price_out, $limit, $offset);
-                $totalBooks = $this->__bookModel->countFilteredBooks($title, $stock_qty, $price_in, $price_out);
-            } else {
-                // Default behavior: get all books
-                $books = $this->__bookModel->getAllBooks($limit, $offset);
-                $totalBooks = $this->__bookModel->countAllBooks();
-            }
-        }
-        $page = max(1, $page);
-        $totalPages = max(1, ceil($totalBooks / $limit));
-
-        $this->view("admin/layoutAdmin.php", [
-            'page' => 'admin/books.php',
-            'page_title' => 'Books Page',
-            'books' => $books,
-            'totalPages' => $totalPages,
-            'currentPage' => $page,
-        ]);
-    }
-
-    public function search()
-    {
-        $limit = 1; // Number of books per page
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $offset = ($page - 1) * $limit;
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $title = isset($_GET['title']) ? trim($_GET['title']) : '';
-            $stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
-            $price_in = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';
-            $price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
-
-            $books = $this->__bookModel->filterBooks($title, $stock_qty, $price_in, $price_out, $limit, $offset);
-            $totalBooks = $this->__bookModel->countFilteredBooks($title, $stock_qty, $price_in, $price_out);
-        } else {
-            // Default behavior: get all books
-            $books = $this->__bookModel->getAllBooks($limit, $offset);
-            $totalBooks = $this->__bookModel->countAllBooks();
+            $data['books'] = $this->__bookModel->getAllBooks($limit, $offset);
+            $data['totalBooks'] = $this->__bookModel->countAllBooks();
         }
 
-        $page = max(1, $page);
-        $totalPages = max(1, ceil($totalBooks / $limit));
+        // Calculate total pages
+        $data['totalPages'] = ceil($data['totalBooks'] / $limit);
 
-        $this->view("admin/layoutAdmin.php", [
-            'page' => 'admin/books.php',
-            'page_title' => 'Books Page',
-            'books' => $books,
-            'totalPages' => $totalPages,
-            'currentPage' => $page,
-        ]);
+        // Pass pagination and filter variables to the view
+        $data['currentPage'] = $page;
+        $data['title'] = $title;
+
+        $data['stock_qty'] = $stock_qty;
+        $data['price_in'] = $price_in;
+        $data['price_out'] = $price_out;
+        $data['page'] = 'admin/books.php';
+        $data['page_title'] = 'Books';
+        $data['startIndex'] = $startIndex;
+
+        $this->view("admin/layoutAdmin.php", $data);
     }
 
 
