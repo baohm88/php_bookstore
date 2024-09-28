@@ -4,14 +4,14 @@ class App
 {
   private $__controller, $__method, $__params, $__conn, $__middleware;
 
-  function __construct($conn)
+  function __construct($conn, $middleware)
   {
     // set default controller, method, params
     $this->__controller = 'home';
     $this->__method = 'index';
     $this->__params = [];
     $this->__conn = $conn;
-    // $this->__middleware = $middleware;
+    $this->__middleware = $middleware;
     $this->handleUrl();
   }
 
@@ -70,7 +70,7 @@ class App
       if (method_exists($this->__controller, $this->__method)) {
         // grant access to specified path using AuthMiddleware
 
-        // $this->__middleware->authorize_user($middlewareUrl);
+        $this->__middleware->authorize_user($middlewareUrl);
 
         // execute the method inside the controller with params entered by user
         call_user_func_array([$this->__controller, $this->__method], $this->__params);

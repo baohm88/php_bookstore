@@ -19,7 +19,6 @@ class AdminController extends BaseController
         $offset = ($page - 1) * $limit;
         $startIndex = $offset + 1;  // This gives the index of the first item on the current page.
 
-
         // Check if filters are applied
         $title = isset($_GET['title']) ? trim($_GET['title']) : '';
         $stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
@@ -41,7 +40,6 @@ class AdminController extends BaseController
         // Pass pagination and filter variables to the view
         $data['currentPage'] = $page;
         $data['title'] = $title;
-
         $data['stock_qty'] = $stock_qty;
         $data['price_in'] = $price_in;
         $data['price_out'] = $price_out;
@@ -49,7 +47,7 @@ class AdminController extends BaseController
         $data['page_title'] = 'Books';
         $data['startIndex'] = $startIndex;
 
-        $this->view("admin/layoutAdmin.php", $data);
+        $this->view("admin/adminLayout.php", $data);
     }
 
 
@@ -59,7 +57,7 @@ class AdminController extends BaseController
         $data['page'] = 'admin/bookDetail.php';
         $data['page_title'] = 'Book Detail';
         $data['book'] = $this->__bookModel->getBookById($bookId);
-        $this->view('admin/layoutAdmin.php', $data);
+        $this->view('admin/adminLayout.php', $data);
     }
 
 
@@ -90,7 +88,7 @@ class AdminController extends BaseController
                 $data['book'] = '';
             };
 
-            $this->view('admin/layoutAdmin.php', $data);
+            $this->view('admin/adminLayout.php', $data);
         } else {
             // method = POST -> collect POST data
             $title = trim($_POST['title']);
@@ -138,7 +136,7 @@ class AdminController extends BaseController
             // show all categories
             $data['categories'] = $this->__categoryModel->getAllCategories();
         }
-        $this->view("admin/layoutAdmin.php", $data);
+        $this->view("admin/adminLayout.php", $data);
     }
 
 
@@ -181,7 +179,7 @@ class AdminController extends BaseController
                 $data['category'] = '';
             };
 
-            $this->view('admin/layoutAdmin.php', $data);
+            $this->view('admin/adminLayout.php', $data);
         } else {
             // method = POST -> collect POST data
             $name = trim($_POST['name']);
@@ -224,7 +222,7 @@ class AdminController extends BaseController
             // fetch all orders for display
             $data['orders'] = $this->__orderModel->getAllOrders();
         }
-        $this->view("admin/layoutAdmin.php", $data);
+        $this->view("admin/adminLayout.php", $data);
     }
 
     function update_order_status()
@@ -261,7 +259,7 @@ class AdminController extends BaseController
                 $data['order'] = '';
             };
 
-            $this->view('admin/layoutAdmin.php', $data);
+            $this->view('admin/adminLayout.php', $data);
         } else {
             // method = POST -> collect POST data
             $name = $_POST['name'];

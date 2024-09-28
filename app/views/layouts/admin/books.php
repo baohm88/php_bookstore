@@ -4,10 +4,6 @@ $totalPages = $data['totalPages'];
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $currentPage = $data['currentPage'];
 $index = $data['startIndex'];
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-// }
 $title = isset($_GET['title']) ? trim($_GET['title']) : '';
 $stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
 $price_in = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';

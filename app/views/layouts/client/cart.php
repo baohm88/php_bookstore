@@ -2,7 +2,6 @@
 
 $cart_items = $_SESSION['cart_items'] ?? '';
 $totalAmount = $data['totalAmount'] ?? 0;
-// show_data($cart_items);
 
 ?>
 
@@ -67,8 +66,6 @@ $totalAmount = $data['totalAmount'] ?? 0;
   </div>
 
 
-
-
 <?php else: ?>
-  <h3 class="center">There is no items in your cart.</h3>
+  <h1 class="center">No items in your cart.</h1>
 <?php endif ?>

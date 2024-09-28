@@ -13,12 +13,12 @@ $book = $data['book'];
 
   <div class="book-details">
     <h3 class="book-title"><?= $book->title ?></h3>
-    <hr>
+    <!-- <hr> -->
     <p class="book-price">$<?= number_format($book->price_out, 2, '.', ',')  ?></p>
 
-    <p>
-    <p><?= $book->description ?></p>
-    </p>
+    <hr>
+    <p><i><?= $book->description ?></i></p>
+
     <hr>
     <p>Author: <?= $book->author ?></p>
     <p>Category: <?= $book->category_name ?></p>

@@ -2,7 +2,6 @@
 $book = $data['book'];
 ?>
 
-<!-- <button><a href="http://localhost/php_bookstore/books">Back to Books List</a></button> -->
 <button class="success" onclick="backToClientBooksList()"><i class="bi bi-chevron-left"></i> Back to Books List</button>
 
 <div class="book-container">
@@ -20,7 +19,8 @@ $book = $data['book'];
         <button class="cart-button">Add to Cart</button>
       </div>
     </div>
-    <p><?= $book->description ?></p>
+    <hr>
+    <p><i><?= $book->description ?></i></p>
     <hr>
     <p>Author: <?= $book->author ?></p>
     <p>Category ID: <?= $book->category_id ?></p>
