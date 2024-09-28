@@ -28,6 +28,24 @@ class BookModel
   }
 
 
+  public function countAllBooks()
+  {
+    try {
+      if (isset($this->__conn)) {
+        $sql = "SELECT COUNT(*) FROM books";
+        $stmt = $this->__conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+      }
+      echo "no connection";
+      return null;
+    } catch (PDOException $ex) {
+      echo $ex->getMessage();
+    }
+  }
+
+
+
   public function getBookById($id)
   {
     try {
@@ -175,4 +193,63 @@ class BookModel
       echo $ex->getMessage();
     }
   }
+  
+  public function countFilteredBooks($title = '', $stock_qty = '', $price_in = '', $price_out = '', $limit = 10, $offset = 0)
+  {
+    try {
+      if (isset($this->__conn)) {
+        $sql = "SELECT COUNT(*) FROM books WHERE 1=1";
+        $params = [];
+
+        // add filters if provided
+        if (!empty($title)) {
+          $sql .= " AND title LIKE :title";
+        }
+
+        if (!empty($stock_qty)) {
+          $sql .= " AND stock_qty = :stock_qty";
+          $params[':stock_qty'] = $stock_qty;
+        }
+
+        if (!empty($price_in)) {
+          $sql .= " AND price_in = :price_in";
+          $params[':price_in'] = $price_in;
+        }
+
+        if (!empty($price_out)) {
+          $sql .= " AND price_out = :price_out";
+          $params[':price_out'] = $price_out;
+        }
+
+        // sort books by id DESC and limit results
+        $sql .= " ORDER BY id DESC LIMIT :limit OFFSET :offset";
+
+        // prepare sql stmt
+        $stmt = $this->__conn->prepare($sql);
+
+
+        if (!empty($title)) {
+          $inputTitle = "%$title%";
+          $stmt->bindParam(':title', $inputTitle);
+        }
+
+        foreach ($params as $key => $value) {
+          $stmt->bindParam($key, $value, PDO::PARAM_INT);
+        }
+
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        // execute sql stmt
+        $stmt->execute();
+        return $stmt->fetchColumn();
+      }
+      echo "no connection";
+      return null;
+    } catch (PDOException $ex) {
+      echo $ex->getMessage();
+    }
+  }
+
+
+  
 }

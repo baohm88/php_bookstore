@@ -47,6 +47,7 @@ main {
   width: 80vw;
   min-height: 88vh;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 .center {
