@@ -50,6 +50,24 @@ main {
   padding: 1rem 10px 0 10px;
 }
 
+.nav-link {
+  color: rgb(123, 123, 123);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--light);
+  background-color: var(--dark);
+}
+
+/* .nav-link.active {
+  color: black;
+} */
+
 .center {
   text-align: center;
 }
@@ -154,6 +172,13 @@ button:hover {
   margin-left: 50px;
 }
 
+/* HOMEPAGE COVER */
+
+.home-cover {
+  max-width: 100%;
+  height: auto;
+}
+
 /* BOOK CARD */
 .book-card {
   border: 1px solid rgb(233, 234, 232);
@@ -186,14 +211,20 @@ button:hover {
 }
 
 .book-details {
+  max-width: 20rem;
   margin-left: 10px;
   width: 100%;
 }
 
+.book-title {
+  margin: 1rem 0;
+}
+
 .book-container {
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  width: 30rem;
+  max-width: 35rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 10px;
   margin: 10px auto;
@@ -325,7 +356,7 @@ button:hover {
 
 .total_cart_items {
   padding: 0 5px;
-  background-color: var(--success);
+  background-color: var(--warning);
   border-radius: 50%;
   color: var(--light);
 }

@@ -25,18 +25,12 @@ $price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
     <?php if (!empty($books)): ?>
         <?php foreach ($books as $book): ?>
             <div class="book-card center">
-                <!-- <a href="http://localhost/shop/book/detail/?id=<?= $book->id ?>"> -->
                 <a href="http://localhost/php_bookstore/books/book/?id=<?= $book->id ?>">
                     <img src="<?= $book->image_url ?>" alt="<?= $book->$title ?>" class="book-image">
-                    <br>
-                    <br>
                     <h4 class="book-title"><?= $book->title ?></h4>
                 </a>
-                <br>
                 <p class="book-price">$<?= number_format($book->price_out, 2, '.', ',')  ?></p>
-                <br>
-
-                <form action="http://localhost/php_bookstore/cart/addToCart/" method="POST">
+                <form action="http://localhost/php_bookstore/cart/add_to_cart/" method="POST">
                     <input type="hidden" name="book_id" value="<?= $book->id ?>">
                     <input type="hidden" name="quantity" value=1>
                     <p><button class="cart-button">Add to Cart</button></p>

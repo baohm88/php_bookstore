@@ -27,68 +27,75 @@ class AdminController extends BaseController
 
         // Fetch filtered books or all books based on whether filters are applied
         if ($title || $stock_qty || $price_in || $price_out) {
-            $data['books'] = $this->__bookModel->filterBooks($title, $stock_qty, $price_in, $price_out, $limit, $offset);
-            $data['totalBooks'] = $this->__bookModel->countFilteredBooks($title, $stock_qty, $price_in, $price_out);
+            $books = $this->__bookModel->filterBooks($title, $stock_qty, $price_in, $price_out, $limit, $offset);
+            $totalBooks = $this->__bookModel->countFilteredBooks($title, $stock_qty, $price_in, $price_out);
         } else {
-            $data['books'] = $this->__bookModel->getAllBooks($limit, $offset);
-            $data['totalBooks'] = $this->__bookModel->countAllBooks();
+            $books = $this->__bookModel->getAllBooks($limit, $offset);
+            $totalBooks = $this->__bookModel->countAllBooks();
         }
 
         // Calculate total pages
-        $data['totalPages'] = ceil($data['totalBooks'] / $limit);
-
-        // Pass pagination and filter variables to the view
-        $data['currentPage'] = $page;
-        $data['title'] = $title;
-        $data['stock_qty'] = $stock_qty;
-        $data['price_in'] = $price_in;
-        $data['price_out'] = $price_out;
-        $data['page'] = 'admin/books.php';
-        $data['page_title'] = 'Books';
-        $data['startIndex'] = $startIndex;
-
-        $this->view("admin/adminLayout.php", $data);
+        $totalPages = ceil($totalBooks / $limit);
+        $this->view("admin/adminLayout.php", [
+            'page'          => 'admin/books.php',
+            'page_title'    => 'Books',
+            'currentPage'   => $page,
+            'title'         => $title,
+            'stock_qty'     => $stock_qty,
+            'price_in'      => $price_in,
+            'price_out'     => $price_out,
+            'startIndex'    => $startIndex,
+            'books'         => $books,
+            'totalBooks'    => $totalBooks,
+            'totalPages'    => $totalPages,
+        ]);
     }
 
 
     function book()
     {
         $bookId = $_REQUEST['id'];
-        $data['page'] = 'admin/bookDetail.php';
-        $data['page_title'] = 'Book Detail';
-        $data['book'] = $this->__bookModel->getBookById($bookId);
-        $this->view('admin/adminLayout.php', $data);
+        $book = $this->__bookModel->getBookById($bookId);
+        $this->view('admin/adminLayout.php', [
+            'page'          => 'admin/bookDetail.php',
+            'page_title'    => 'Book Detail',
+            'book'          => $book,
+        ]);
     }
 
 
     function edit_book()
     {
-        $data['page'] = 'admin/book_form.php';
-        $data['categories'] = $this->__categoryModel->getAllCategories();
+        $categories = $this->__categoryModel->getAllCategories();
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if (isset($_REQUEST['id'])) {
-                // edit existing book
-                $data['page_title'] = 'Edit Book';
+                // edit
+                $page_title = 'Edit Book';
                 $bookId = $_REQUEST['id'];
                 if (!$bookId > 0) {
-                    $data['error'] = 'Wrong Book ID. please enter a valid Book ID';
-                    $data['book'] = '';
+                    $error = 'Wrong Book ID. please enter a valid Book ID';
+                    $book = '';
                 } else {
-                    // get book from db
-                    $data['book'] = $this->__bookModel->getBookById($bookId);
-                    if (empty($data['book'])) {
-                        $data['error'] = 'Book with ID# ' . $bookId . ' is not found!';
-                        $data['book'] = '';
+                    $book = $this->__bookModel->getBookById($bookId);
+                    if (empty($book)) {
+                        $error = 'Book with ID# ' . $bookId . ' is not found!';
+                        $book = '';
                     }
                 }
             } else {
                 // add new
-                $data['page_title'] = 'Add New Book';
-                $data['book'] = '';
+                $page_title = 'Add New Book';
+                $book = '';
             };
 
-            $this->view('admin/adminLayout.php', $data);
+            $this->view('admin/adminLayout.php', [
+                'page'          => 'admin/book_form.php',
+                'page_title'    => $page_title,
+                'book'          => $book,
+                'categories'    => $categories,
+                'error'         => $error ?? '',
+            ]);
         } else {
             // method = POST -> collect POST data
             $title = trim($_POST['title']);
@@ -101,10 +108,8 @@ class AdminController extends BaseController
             $image_url = trim($_POST['image_url']);
             $id = $_POST['id'];
             if ($id > 0) {
-                // update book by id
                 $this->__bookModel->updateBookById($id, $title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url);
             } else {
-                // save book to db
                 $this->__bookModel->saveBookToDB($title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url);
             }
 

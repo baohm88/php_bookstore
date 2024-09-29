@@ -30,9 +30,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </div>
         <div>
             <ul class="flex-container">
-                <li class="nav-link"><a href="http://localhost/php_bookstore/home" class="<?= ($current_page == 'home' || $current_page == 'index') ? 'active' : '' ?>"><i class="bi bi-house-heart-fill"></i> Home</a></li>
-                <li class="nav-link"><a href="http://localhost/php_bookstore/books" class="<?= ($current_page == 'books') ? 'active' : '' ?>"><i class="bi bi-book-fill"></i> Books</a></li>
-                <li class="nav-link"><a href="http://localhost/php_bookstore/cart" class="<?= ($current_page == 'cart') ? 'active' : '' ?>"><i class="bi bi-cart-check-fill"></i> Cart <span class="<?= $total_cart_items > 0 ? 'total_cart_items' : '' ?>"><?= $total_cart_items > 0 ? $total_cart_items : ''  ?></span> </a></li>
+                <li><a href="http://localhost/php_bookstore/home" class="nav-link <?= ($current_page == 'home' || $current_page == 'index') ? 'active' : '' ?>"><i class="bi bi-house-heart-fill"></i> Home</a></li>
+                <li><a href="http://localhost/php_bookstore/books" class="nav-link <?= ($current_page == 'books' || $current_page == 'book') ? 'active' : '' ?>"><i class="bi bi-book-fill"></i> Books</a></li>
+                <li><a href="http://localhost/php_bookstore/cart" class="nav-link <?= ($current_page == 'cart') ? 'active' : '' ?>"><i class="bi bi-cart-check-fill"></i> Cart <span class="<?= $total_cart_items > 0 ? 'total_cart_items' : '' ?>"><?= $total_cart_items > 0 ? $total_cart_items : ''  ?></span> </a></li>
 
                 <?php if (isset($username)): ?>
                     <li class="user-account">

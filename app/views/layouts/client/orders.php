@@ -2,7 +2,7 @@
 $user_orders = $data['user_orders'] ?? '';
 ?>
 
-<h1 class="center">your orders </h1>
+<h1 class="center">Your orders </h1>
 
 <?php if (!empty($user_orders)): ?>
   <table>
