@@ -130,75 +130,30 @@ class AdminController extends BaseController
     // CATEGORIES CONTROLLER
     public function categories()
     {
-        $data['page'] = 'admin/categories.php';
-        $data['page_title'] = 'Categories Page';
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // filter categories
-            $name = trim($_POST['name']);
-            $dob = trim($_POST['dob']);
-            $data['categories'] = $this->__categoryModel->filterCategories($name, $dob);
+            $name   = trim($_POST['name']);
+            $dob    = trim($_POST['dob']);
+            $categories = $this->__categoryModel->filterCategories($name, $dob);
         } else {
             // show all categories
-            $data['categories'] = $this->__categoryModel->getAllCategories();
+            $categories = $this->__categoryModel->getAllCategories();
         }
-        $this->view("admin/adminLayout.php", $data);
+        $this->view("admin/adminLayout.php", [
+            'page'          => 'admin/categories.php',
+            'page_title'    => 'Categories Page',
+            'categories'    => $categories,
+        ]);
     }
 
 
     function update_category()
     {
-        // get id, name
-        $id = trim($_REQUEST['id']);
-        $name = trim($_REQUEST['name']);
-
-        // update category by id
+        $id     = trim($_REQUEST['id']);
+        $name   = trim($_REQUEST['name']);
         $this->__categoryModel->updateCategoryById($id, $name);
-        // redirect user to same page
         header("Location: http://localhost/php_bookstore/admin/categories");
-    }
-
-
-    function edit_category()
-    {
-        $data['page'] = 'admin/category_form.php';
-
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if (isset($_REQUEST['id'])) {
-                // edit
-                $data['page_title'] = 'Edit Category';
-                $categoryId = trim($_REQUEST['id']);
-                if (!$categoryId > 0) {
-                    $data['error'] = 'Wrong Category ID. please enter a valid Category ID';
-                    $data['category'] = '';
-                } else {
-                    // get category from db
-                    $data['category'] = $this->__categoryModel->getCategoryById($categoryId);
-                    if (empty($data['category'])) {
-                        $data['error'] = 'Category with ID# ' . $categoryId . ' is not found!';
-                        $data['category'] = '';
-                    }
-                }
-            } else {
-                // add new
-                $data['page_title'] = 'Add New Category';
-                $data['category'] = '';
-            };
-
-            $this->view('admin/adminLayout.php', $data);
-        } else {
-            // method = POST -> collect POST data
-            $name = trim($_POST['name']);
-            $id = trim($_POST['id']);
-            if ($id > 0) {
-                // update category by id
-                $this->__categoryModel->updateCategoryById($id, $name);
-            } else {
-                // save category to db
-                $this->__categoryModel->saveCategoryToDB($name);
-            }
-
-            header("Location: http://localhost/php_bookstore/admin/categories");
-        }
     }
 
 
