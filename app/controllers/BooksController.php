@@ -31,14 +31,6 @@ class BooksController extends BaseController
             $totalBooks = $this->__bookModel->countAllActiveBooks();
         }
 
-        // Calculate total pages
-
-
-        // Pass pagination and filter variables to the view
-
-
-
-
         $this->view("client/clientLayout.php", [
             'page'          => 'client/books.php',
             'page_title'    => 'Books',
