@@ -2,7 +2,6 @@
 
 $cart_items = $_SESSION['cart_items'] ?? '';
 $totalAmount = $data['totalAmount'] ?? 0;
-show_data($_SESSION);
 
 ?>
 

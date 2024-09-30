@@ -8,8 +8,9 @@ class HomeController extends BaseController
 
   function index()
   {
-    $data['page'] = 'client/home.php';
-    $data['page_title'] = 'Bookstore';
-    $this->view('client/clientLayout.php', $data);
+    $this->view('client/clientLayout.php', [
+      'page'        => 'client/home.php',
+      'page_title'  => 'Bookstore'
+    ]);
   }
 }
