@@ -130,7 +130,6 @@ class AdminController extends BaseController
     // CATEGORIES CONTROLLER
     public function categories()
     {
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // filter categories
             $name   = trim($_POST['name']);
@@ -157,10 +156,55 @@ class AdminController extends BaseController
     }
 
 
+    function edit_category()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if (isset($_REQUEST['id'])) {
+                // edit
+                $page_title = 'Edit Category';
+                $categoryId = trim($_REQUEST['id']);
+                if (!$categoryId > 0) {
+                    $error = 'Wrong Category ID. please enter a valid Category ID';
+                    $category = '';
+                } else {
+                    // get category from db
+                    $category = $this->__categoryModel->getCategoryById($categoryId);
+                    if (empty($category)) {
+                        $error = 'Category with ID# ' . $categoryId . ' is not found!';
+                        $category = '';
+                    }
+                }
+            } else {
+                // add new
+                $page_title = 'Add New Category';
+                $category = '';
+            };
+
+            $this->view('admin/adminLayout.php', [
+                'page'          => 'admin/category_form.php',
+                'page_title'    => $page_title,
+                'error'         => $error ?? '',
+                'category'      => $category,
+            ]);
+        } else {
+            // method = POST -> collect POST data
+            $name   = trim($_POST['name']);
+            $id     = trim($_POST['id']);
+            if ($id > 0) {
+                $this->__categoryModel->updateCategoryById($id, $name);
+            } else {
+                $this->__categoryModel->saveCategoryToDB($name);
+            }
+
+            header("Location: http://localhost/php_bookstore/admin/categories");
+        }
+    }
+
+
     function delete_category()
     {
-        $categoryId = trim($_REQUEST['id']);
-        $data['category'] = $this->__categoryModel->deleteCategoryById($categoryId);
+        $categoryId         = trim($_REQUEST['id']);
+        $data['category']   = $this->__categoryModel->deleteCategoryById($categoryId);
         header("Location: http://localhost/php_bookstore/admin/categories");
     }
 
@@ -169,72 +213,77 @@ class AdminController extends BaseController
     // ORDERS CONTROLLER
     public function orders()
     {
-        $data['page'] = 'admin/orders.php';
-        $data['page_title'] = 'Orders Page';
-        $data['orderStatusOptions'] = ['pending', 'completed', 'canceled'];
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // filter orders for display
             $name = trim($_POST['name']);
             $dob = trim($_POST['dob']);
-            $data['orders'] = $this->__orderModel->filterOrders($name, $dob);
+            $orders = $this->__orderModel->filterOrders($name, $dob);
         } else {
             // fetch all orders for display
-            $data['orders'] = $this->__orderModel->getAllOrders();
+            $orders = $this->__orderModel->getAllOrders();
         }
-        $this->view("admin/adminLayout.php", $data);
+        $this->view("admin/adminLayout.php", [
+            'page'                  => 'admin/orders.php',
+            'page_title'            => 'Orders Page',
+            'orderStatusOptions'    => ['pending', 'completed', 'canceled'],
+            'orders'                => $orders,
+        ]);
     }
+
 
     function update_order_status()
     {
-        $id = trim($_REQUEST['id']);
-        $status = trim($_REQUEST['status']);
+        $id         = trim($_REQUEST['id']);
+        $status     = trim($_REQUEST['status']);
         $this->__orderModel->updateOrderStatus($id, $status);
         header("Location: http://localhost/php_bookstore/admin/orders");
     }
 
-    function edit_order()
-    {
-        $data['page'] = 'admin/order_form';
+    // function edit_order()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //         if (isset($_REQUEST['id'])) {
+    //             // edit
+    //             $page_title = 'Edit Order';
+    //             $orderId = $_REQUEST['id'];
+    //             if (!$orderId > 0) {
+    //                 $error = 'Wrong Order ID. please enter a valid Order ID';
+    //                 $order = '';
+    //             } else {
+    //                 // get order from db
+    //                 $order = $this->__orderModel->getOrderById($orderId);
+    //                 if (empty($order)) {
+    //                     $error = 'Order with ID# ' . $orderId . ' is not found!';
+    //                     $order = '';
+    //                 }
+    //             }
+    //         } else {
+    //             // add new
+    //             $page_title = 'Add New Order';
+    //             $order = '';
+    //         };
 
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if (isset($_REQUEST['id'])) {
-                // edit
-                $data['page_title'] = 'Edit Order';
-                $orderId = $_REQUEST['id'];
-                if (!$orderId > 0) {
-                    $data['error'] = 'Wrong Order ID. please enter a valid Order ID';
-                    $data['order'] = '';
-                } else {
-                    // get order from db
-                    $data['order'] = $this->__orderModel->getOrderById($orderId);
-                    if (empty($data['order'])) {
-                        $data['error'] = 'Order with ID# ' . $orderId . ' is not found!';
-                        $data['order'] = '';
-                    }
-                }
-            } else {
-                // add new
-                $data['page_title'] = 'Add New Order';
-                $data['order'] = '';
-            };
+    //         $this->view('admin/adminLayout.php', [
+    //             'page' => 'admin/order_form',
+    //             'page_title' => $page_title,
+    //             'error' => $error ?? '',
+    //             'order' => $order,
+    //         ]);
+    //     } else {
+    //         // method = POST -> collect POST data
+    //         $name       = $_POST['name'];
+    //         $address    = $_POST['address'];
+    //         $contact    = $_POST['contact'];
+    //         $id = $_POST['id'];
+    //         if ($id > 0) {
+    //             // update order by id
+    //             $this->__orderModel->updateOrderById($id, $name, $address, $contact);
+    //         } else {
+    //             // save order to db
+    //             $this->__orderModel->saveOrderToDB($name);
+    //         }
 
-            $this->view('admin/adminLayout.php', $data);
-        } else {
-            // method = POST -> collect POST data
-            $name = $_POST['name'];
-            $address = $_POST['address'];
-            $contact = $_POST['contact'];
-            $id = $_POST['id'];
-            if ($id > 0) {
-                // update order by id
-                $this->__orderModel->updateOrderById($id, $name, $address, $contact);
-            } else {
-                // save order to db
-                $this->__orderModel->saveOrderToDB($name);
-            }
-
-            header("Location: http://localhost/php_bookstore/admin/orders");
-        }
-    }
+    //         header("Location: http://localhost/php_bookstore/admin/orders");
+    //     }
+    // }
 }
