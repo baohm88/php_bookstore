@@ -108,15 +108,6 @@ class AdminController extends BaseController
             $image_url      = trim($_POST['image_url']);
             $status         = trim($_POST['status']);
             $id             = trim($_POST['id']);
-            show_data($title);
-            show_data($author);
-            show_data($description);
-            show_data($category_id);
-            show_data($price_in);
-            show_data($price_out);
-            show_data($stock_qty);
-            show_data($image_url);
-            show_data($status);
 
             if ($id > 0) {
                 $this->__bookModel->updateBookById($id, $title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url, $status);

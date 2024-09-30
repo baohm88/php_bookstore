@@ -84,9 +84,28 @@ class BookModel
     {
         try {
             if (isset($this->__conn)) {
-                $sql = "SELECT b.*, c.name as category_name FROM books b
-                JOIN categories c on c.id = b.category_id
-                WHERE b.id = :id";
+                $sql = "SELECT b.*, c.name AS category_name FROM books b
+                        JOIN categories c ON c.id = b.category_id
+                        WHERE b.id = :id";
+                $stmt = $this->__conn->prepare($sql);
+                $stmt->bindParam("id", $id, PDO::PARAM_INT);
+                $stmt->execute();
+                return $stmt->fetch(PDO::FETCH_OBJ);
+            }
+            echo "no connection";
+            return null;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
+
+    public function getActiveBookById($id)
+    {
+        try {
+            if (isset($this->__conn)) {
+                $sql = "SELECT b.*, c.name AS category_name FROM books b
+                        JOIN categories c ON c.id = b.category_id
+                        WHERE b.id = :id AND b.status = 'active'";
                 $stmt = $this->__conn->prepare($sql);
                 $stmt->bindParam("id", $id, PDO::PARAM_INT);
                 $stmt->execute();

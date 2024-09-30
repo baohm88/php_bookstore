@@ -1,13 +1,13 @@
 <?php
-$books = $data['books'];
-$totalPages = $data['totalPages'];
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$currentPage = $data['currentPage'];
-$index = $data['startIndex'];
-$title = isset($_GET['title']) ? trim($_GET['title']) : '';
-$stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
-$price_in = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';
-$price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
+$books          = $data['books'];
+$totalPages     = $data['totalPages'];
+$page           = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$currentPage    = $data['currentPage'];
+$index          = $data['startIndex'];
+$title          = isset($_GET['title']) ? trim($_GET['title']) : '';
+$stock_qty      = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
+$price_in       = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';
+$price_out      = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
 ?>
 
 <h1 class="center">Shop our top rated books </h1>
