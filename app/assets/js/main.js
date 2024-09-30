@@ -53,6 +53,10 @@ function backToCategoriesList() {
     window.location.href = "http://localhost/php_bookstore/admin/categories";
 }
 
+function backToAdminOrdersList() {
+    window.location.href = "http://localhost/php_bookstore/admin/orders";
+}
+
 function updateCategoryName(categoryId) {
     if (this.event.key === "Enter") {
         const categoryName = this.event.target.value; // Get the input value

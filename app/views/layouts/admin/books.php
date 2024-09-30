@@ -56,7 +56,6 @@ $bookStatusOptions = ['active', 'inactive'];
                     <td>$<?= number_format(($book->price_out - $book->price_in), 2, '.', ',') ?></td>
                     <td class="center"><a href="http://localhost/php_bookstore/admin/book/?id=<?= $book->id ?>"><button class="success"><i class="bi bi-eye-fill"></i> </button></a></td>
                     <td class="center"><a href="http://localhost/php_bookstore/admin/edit_book/?id=<?= $book->id ?>"><button class="primary"><i class="bi bi-pen-fill"></i> </button></a></td>
-                    <!-- <td class="center"><button class="danger" onclick="confirmDeleteBook(<?= $book->id ?>)"><i class="bi bi-trash3-fill"></i> </button></td> -->
                     <td>
                         <select name="status" id="status" onchange="updateBookStatus(<?= $book->id ?>)" class="<?= $book->status == 'active' ? 'completed' : 'cancelled' ?>">
                             <?php foreach ($bookStatusOptions as $option): ?>

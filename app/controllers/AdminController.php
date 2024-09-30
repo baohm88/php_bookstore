@@ -117,7 +117,7 @@ class AdminController extends BaseController
             show_data($stock_qty);
             show_data($image_url);
             show_data($status);
-            
+
             if ($id > 0) {
                 $this->__bookModel->updateBookById($id, $title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url, $status);
             } else {
@@ -249,6 +249,17 @@ class AdminController extends BaseController
         ]);
     }
 
+    public function order_detail()
+    {
+        $order_id = $_GET['id'];
+        $order_items = $this->__orderModel->getUserOrderById($order_id);
+        $this->view('admin/adminLayout.php', [
+            'page'        => 'admin/orderDetail.php',
+            'page_title'  => 'Order# ' . $order_id,
+            'order_items' => $order_items
+        ]);
+    }
+
 
     function update_order_status()
     {
@@ -257,52 +268,4 @@ class AdminController extends BaseController
         $this->__orderModel->updateOrderStatus($id, $status);
         header("Location: http://localhost/php_bookstore/admin/orders");
     }
-
-    // function edit_order()
-    // {
-    //     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //         if (isset($_REQUEST['id'])) {
-    //             // edit
-    //             $page_title = 'Edit Order';
-    //             $orderId = $_REQUEST['id'];
-    //             if (!$orderId > 0) {
-    //                 $error = 'Wrong Order ID. please enter a valid Order ID';
-    //                 $order = '';
-    //             } else {
-    //                 // get order from db
-    //                 $order = $this->__orderModel->getOrderById($orderId);
-    //                 if (empty($order)) {
-    //                     $error = 'Order with ID# ' . $orderId . ' is not found!';
-    //                     $order = '';
-    //                 }
-    //             }
-    //         } else {
-    //             // add new
-    //             $page_title = 'Add New Order';
-    //             $order = '';
-    //         };
-
-    //         $this->view('admin/adminLayout.php', [
-    //             'page' => 'admin/order_form',
-    //             'page_title' => $page_title,
-    //             'error' => $error ?? '',
-    //             'order' => $order,
-    //         ]);
-    //     } else {
-    //         // method = POST -> collect POST data
-    //         $name       = $_POST['name'];
-    //         $address    = $_POST['address'];
-    //         $contact    = $_POST['contact'];
-    //         $id = $_POST['id'];
-    //         if ($id > 0) {
-    //             // update order by id
-    //             $this->__orderModel->updateOrderById($id, $name, $address, $contact);
-    //         } else {
-    //             // save order to db
-    //             $this->__orderModel->saveOrderToDB($name);
-    //         }
-
-    //         header("Location: http://localhost/php_bookstore/admin/orders");
-    //     }
-    // }
 }

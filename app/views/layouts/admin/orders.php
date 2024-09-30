@@ -23,6 +23,7 @@ $orderStatusOptions = $data['orderStatusOptions'];
             <td><?= $order->user_id ?></td>
             <td><?= $order->order_date ?></td>
             <td>$<?= $order->total ?></td>
+            <td class="center"><a href="http://localhost/php_bookstore/admin/order_detail/?id=<?= $order->id ?>"><button class="success"><i class="bi bi-eye-fill"></i> </button></a></td>
             <td>
                 <select name="status" id="status" onchange="updateOrderStatus(<?= $order->id ?>)" class="<?= $order->status == 'completed' ? 'completed' : ($order->status == 'pending' ? 'pending' : 'cancelled') ?>">
                     <?php foreach ($orderStatusOptions as $option): ?>
