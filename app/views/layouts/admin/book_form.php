@@ -1,6 +1,7 @@
 <?php
 $book = $data['book'];
 $categories = $data['categories'];
+$bookStatusOptions = ['active', 'inactive'];
 
 if (isset($data['error'])) {
     $error = $data['error'];
@@ -52,7 +53,6 @@ if (isset($data['error'])) {
             <label>Category: </label>
 
             <select name="category_id" id="category_id">
-
                 <?php if ($book->id != 0): ?>
                     <option value="" disabled>Please select a category</option>
                     <?php foreach ($categories as $category): ?>
@@ -60,14 +60,14 @@ if (isset($data['error'])) {
                             <option value="<?= $category->id ?>" selected><?= $category->name ?> </option>
                         <?php else: ?>
                             <option value="<?= $category->id ?>"><?= $category->name ?> </option>
-                            <!-- <?php endif ?> -->
-                        <?php endforeach ?>
-                    <?php else: ?>
-                        <option value="" disabled selected>Please select a category</option>
-                        <?php foreach ($categories as $category): ?>
-                            <option value="<?= $category->id ?>"><?= $category->name ?> </option>
-                        <?php endforeach ?>
-                    <?php endif ?>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                <?php else: ?>
+                    <option value="" disabled selected>Please select a category</option>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?= $category->id ?>"><?= $category->name ?> </option>
+                    <?php endforeach ?>
+                <?php endif ?>
             </select>
         </p>
 
@@ -80,7 +80,29 @@ if (isset($data['error'])) {
 
     <p>
         <label>Image URL: </label>
-        <input type=" text" name="image_url" placeholder="Book Image URL" value="<?= $book->image_url ?? '' ?>">
+        <input type="text" name="image_url" placeholder="Book Image URL" value="<?= $book->image_url ?? '' ?>">
+    </p>
+    <p>
+        <label>Status: </label>
+
+        <select name="status" id="status">
+            <?php if ($book->id != 0): ?>
+                <option value="" disabled>Please select a status</option>
+                <?php foreach ($bookStatusOptions as $option): ?>
+                    <?php if ($option == $book->status): ?>
+                        <option value="<?= $option ?>" selected><?= $option ?> </option>
+                    <?php else: ?>
+                        <option value="<?= $option ?>"><?= $option ?> </option>
+                    <?php endif ?>
+                <?php endforeach ?>
+            <?php else: ?>
+                <option value="" disabled selected>Please select a category</option>
+                <?php foreach ($bookStatusOptions as $option): ?>
+                    <option value="<?= $option ?>"><?= $option ?> </option>
+                <?php endforeach ?>
+            <?php endif ?>
+        </select>
+
     </p>
     <p class="form-actions">
         <button type="submit" class="success">Save</button>

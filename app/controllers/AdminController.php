@@ -74,13 +74,13 @@ class AdminController extends BaseController
                 $page_title = 'Edit Book';
                 $bookId = $_REQUEST['id'];
                 if (!$bookId > 0) {
-                    $error = 'Wrong Book ID. please enter a valid Book ID';
-                    $book = '';
+                    $error  = 'Wrong Book ID. please enter a valid Book ID';
+                    $book   = '';
                 } else {
                     $book = $this->__bookModel->getBookById($bookId);
                     if (empty($book)) {
-                        $error = 'Book with ID# ' . $bookId . ' is not found!';
-                        $book = '';
+                        $error  = 'Book with ID# ' . $bookId . ' is not found!';
+                        $book   = '';
                     }
                 }
             } else {
@@ -98,25 +98,44 @@ class AdminController extends BaseController
             ]);
         } else {
             // method = POST -> collect POST data
-            $title = trim($_POST['title']);
-            $author = trim($_POST['author']);
-            $description = trim($_POST['description']);
-            $category_id = trim($_POST['category_id']);
-            $price_in = trim($_POST['price_in']);
-            $price_out = trim($_POST['price_out']);
-            $stock_qty = trim($_POST['stock_qty']);
-            $image_url = trim($_POST['image_url']);
-            $id = $_POST['id'];
+            $title          = trim($_POST['title']);
+            $author         = trim($_POST['author']);
+            $description    = trim($_POST['description']);
+            $category_id    = trim($_POST['category_id']);
+            $price_in       = trim($_POST['price_in']);
+            $price_out      = trim($_POST['price_out']);
+            $stock_qty      = trim($_POST['stock_qty']);
+            $image_url      = trim($_POST['image_url']);
+            $status         = trim($_POST['status']);
+            $id             = trim($_POST['id']);
+            show_data($title);
+            show_data($author);
+            show_data($description);
+            show_data($category_id);
+            show_data($price_in);
+            show_data($price_out);
+            show_data($stock_qty);
+            show_data($image_url);
+            show_data($status);
+            
             if ($id > 0) {
-                $this->__bookModel->updateBookById($id, $title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url);
+                $this->__bookModel->updateBookById($id, $title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url, $status);
             } else {
-                $this->__bookModel->saveBookToDB($title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url);
+                $this->__bookModel->saveBookToDB($title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url, $status);
             }
 
             header("Location: http://localhost/php_bookstore/admin");
         }
     }
 
+
+    function update_book_status()
+    {
+        $id         = trim($_REQUEST['id']);
+        $status     = trim($_REQUEST['status']);
+        $this->__bookModel->updateBookStatusById($id, $status);
+        header("Location: http://localhost/php_bookstore/admin");
+    }
 
     function delete_book()
     {

@@ -27,13 +27,11 @@ $totalAmount = $data['totalAmount'] ?? 0;
                                 <a href="http://localhost/php_bookstore/books/book/?id=<?= $book->id ?>">
                                     <img src="<?= $book->image_url ?>" alt="<?= $book->title ?>" class="book-image-cart">
                                 </a>
-
                             </td>
                             <td>
                                 <a href="http://localhost/php_bookstore/books/book/?id=<?= $book->id ?>">
                                     <?= $book->title ?>
                                 </a>
-
                             </td>
                             <td>
                                 <input type="number" name="quantity" value="<?= $book->quantity ?>" placeholder="Enter quantity" onkeydown="updateCartItemQty(<?= $book->id ?>)">

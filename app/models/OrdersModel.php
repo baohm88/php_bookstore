@@ -45,6 +45,17 @@ class OrdersModel
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getUserOrderById($order_id)
+    {
+        $stmt = $this->__conn->prepare("SELECT o.*, oi.quantity, oi.price, b.id as book_id, b.title, b.image_url FROM orders o
+                                        JOIN order_items oi ON oi.order_id = o.id
+                                        JOIN books b ON b.id = oi.book_id
+                                        WHERE o.id = :id
+                                        ORDER BY o.order_date DESC");
+        $stmt->execute([':id' => $order_id]);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function getAllOrders($limit = 10, $offset = 0)
     {
         try {

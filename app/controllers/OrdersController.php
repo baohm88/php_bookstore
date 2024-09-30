@@ -45,4 +45,18 @@ class OrdersController extends BaseController
             'user_orders' => $user_orders
         ]);
     }
+
+    public function order()
+    {
+        if (isset($_SESSION['user'])) {
+            $order_id = $_GET['id'];
+            $order_items = $this->__ordersModel->getUserOrderById($order_id);
+        }
+
+        $this->view('client/clientLayout.php', [
+            'page'        => 'client/orderDetail.php',
+            'page_title'  => 'Order# ' . $order_id,
+            'order_items' => $order_items
+        ]);
+    }
 }

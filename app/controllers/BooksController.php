@@ -10,7 +10,6 @@ class BooksController extends BaseController
         $this->__orderModel = $this->load_model('OrdersModel', $conn);
     }
 
-    // BOOKS CONTROLLER
     public function index()
     {
         // Pagination variables
@@ -27,11 +26,11 @@ class BooksController extends BaseController
 
         // Fetch filtered books or all books based on whether filters are applied
         if ($title || $stock_qty || $price_in || $price_out) {
-            $data['books'] = $this->__bookModel->filterBooks($title, $stock_qty, $price_in, $price_out, $limit, $offset);
-            $data['totalBooks'] = $this->__bookModel->countFilteredBooks($title, $stock_qty, $price_in, $price_out);
+            $data['books'] = $this->__bookModel->filterActiveBooks($title, $stock_qty, $price_in, $price_out, $limit, $offset);
+            $data['totalBooks'] = $this->__bookModel->countFilteredActiveBooks($title, $stock_qty, $price_in, $price_out);
         } else {
-            $data['books'] = $this->__bookModel->getAllBooks($limit, $offset);
-            $data['totalBooks'] = $this->__bookModel->countAllBooks();
+            $data['books'] = $this->__bookModel->getAllActiveBooks($limit, $offset);
+            $data['totalBooks'] = $this->__bookModel->countAllActiveBooks();
         }
 
         // Calculate total pages

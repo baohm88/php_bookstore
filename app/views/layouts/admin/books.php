@@ -8,6 +8,8 @@ $title = isset($_GET['title']) ? trim($_GET['title']) : '';
 $stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
 $price_in = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';
 $price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
+$bookStatusOptions = ['active', 'inactive'];
+// show_data($books);
 
 ?>
 
@@ -30,7 +32,7 @@ $price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
 
 
 <?php if (count($books) > 0) : ?>
-    <div style="overflow-x: auto;">
+    <div class="table-container">
         <table>
             <tr>
                 <th>ID</th>
@@ -54,7 +56,18 @@ $price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
                     <td>$<?= number_format(($book->price_out - $book->price_in), 2, '.', ',') ?></td>
                     <td class="center"><a href="http://localhost/php_bookstore/admin/book/?id=<?= $book->id ?>"><button class="success"><i class="bi bi-eye-fill"></i> </button></a></td>
                     <td class="center"><a href="http://localhost/php_bookstore/admin/edit_book/?id=<?= $book->id ?>"><button class="primary"><i class="bi bi-pen-fill"></i> </button></a></td>
-                    <td class="center"><button class="danger" onclick="confirmDeleteBook(<?= $book->id ?>)"><i class="bi bi-trash3-fill"></i> </button></td>
+                    <!-- <td class="center"><button class="danger" onclick="confirmDeleteBook(<?= $book->id ?>)"><i class="bi bi-trash3-fill"></i> </button></td> -->
+                    <td>
+                        <select name="status" id="status" onchange="updateBookStatus(<?= $book->id ?>)" class="<?= $book->status == 'active' ? 'completed' : 'cancelled' ?>">
+                            <?php foreach ($bookStatusOptions as $option): ?>
+                                <?php if ($option == $book->status): ?>
+                                    <option value="<?= $option ?>" selected><?= $option ?> </option>
+                                <?php else: ?>
+                                    <option value="<?= $option ?>"><?= $option ?> </option>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                        </select>
+                    </td>
                 </tr>
             <?php endforeach ?>
 

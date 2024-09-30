@@ -64,6 +64,13 @@ function updateOrderStatus(orderId) {
     window.location.href = `http://localhost/php_bookstore/admin/update_order_status/?id=${orderId}&status=${this.event.target.value}`;
 }
 
+function updateBookStatus(bookId) {
+    console.log("book id" + bookId);
+    console.log("status: " + this.event.target.value);
+
+    window.location.href = `http://localhost/php_bookstore/admin/update_book_status/?id=${bookId}&status=${this.event.target.value}`;
+}
+
 // FOR USERS
 function confirmDeleteCartItem(bookId) {
     const userConfirmed = confirm(
@@ -79,6 +86,10 @@ function confirmDeleteCartItem(bookId) {
 
 function backToClientBooksList() {
     window.location.href = "http://localhost/php_bookstore/books";
+}
+
+function backToClientOrdersList() {
+    window.location.href = "http://localhost/php_bookstore/orders";
 }
 
 function updateCartItemQty(bookId) {
