@@ -9,8 +9,6 @@ $stock_qty = isset($_GET['stock_qty']) ? trim($_GET['stock_qty']) : '';
 $price_in = isset($_GET['price_in']) ? trim($_GET['price_in']) : '';
 $price_out = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
 $bookStatusOptions = ['active', 'inactive'];
-// show_data($books);
-
 ?>
 
 <h1 class="center">List of Books</h1>
@@ -35,8 +33,9 @@ $bookStatusOptions = ['active', 'inactive'];
     <div class="table-container">
         <table>
             <tr>
-                <th>ID</th>
-                <th>Title</th>
+                <th>#</th>
+
+                <th colspan="2">Title</th>
                 <th>Stock Qty</th>
                 <th>Price In</th>
                 <th>Price Out</th>
@@ -49,6 +48,7 @@ $bookStatusOptions = ['active', 'inactive'];
             foreach ($books as $book): ?>
                 <tr>
                     <td><?= $index++ ?></td>
+                    <td><img src="<?= $book->image_url ?>" alt="<?= $book->title ?>" class="book-image-cart"></td>
                     <td><?= $book->title ?></td>
                     <td><?= $book->stock_qty ?></td>
                     <td>$<?= number_format($book->price_in, 2, '.', ',') ?></td>

@@ -32,7 +32,7 @@ $book = $data['book'];
       <hr>
       <div>
         <p>Author: <?= $book->author ?></p>
-        <p>Category ID: <?= $book->category_id ?></p>
+        <p>Category: <?= $book->category_name ?></p>
       </div>
 
 
