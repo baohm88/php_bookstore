@@ -113,3 +113,27 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.body.style.backgroundColor = "rgb(245, 245, 247)";
 }
+
+// MODAL
+
+// Get modal and trigger elements
+const modal = document.getElementById("editProfileModal");
+const openModalBtn = document.getElementById("openModalBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+
+// Open modal when trigger button is clicked
+openModalBtn.onclick = function () {
+    modal.style.display = "flex"; // Show modal with flex layout (for centering)
+};
+
+// Close modal when close button is clicked
+closeModalBtn.onclick = function () {
+    modal.style.display = "none";
+};
+
+// Close modal if user clicks outside the modal content
+window.onclick = function (event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+};

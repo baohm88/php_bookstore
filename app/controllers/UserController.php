@@ -38,6 +38,37 @@ class UserController extends BaseController
         }
     }
 
+
+    public function profile()
+    {
+        if (isset($_SESSION['user'])) {
+            $user = $this->__userModel->getUserByUsername($_SESSION['user']->username);
+            if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                $this->view("client/clientLayout.php", [
+                    'page' => 'client/profile.php',
+                    'page_title' => 'User Profile',
+                    'user' =>  $user,
+                ]);
+            } else {
+                $user_id            = $_SESSION['user']->id;
+                $image_url          = trim($_POST['image_url']);
+                $fullName           = trim($_POST['fullName']);
+                $bio                = trim($_POST['bio']);
+                $gender             = trim($_POST['gender']);
+                $entered_birthday   = trim($_POST['birthday']);
+                // Convert the birthday to a timestamp and then format it
+                $birthday = date('Y-m-d', strtotime($entered_birthday));
+                $email              = trim($_POST['email']);
+                $shipping_address   = trim($_POST['shipping_address']);
+                $this->__userModel->updateUserProfile($user_id, $image_url, $fullName, $bio, $gender, $birthday, $email, $shipping_address);
+
+                header("Location: http://localhost/php_bookstore/user/profile");
+            }
+        } else {
+            header("Location: http://localhost/php_bookstore/user/login");
+        }
+    }
+
     public function logout()
     {
         // if logged in -> delete user info from SESSION

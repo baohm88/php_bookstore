@@ -4,17 +4,17 @@ class OrdersController extends BaseController
     private $__ordersModel, $__cartModel;
     public function __construct($conn)
     {
-        $this->__ordersModel = $this->load_model("OrdersModel", $conn);
-        $this->__cartModel = $this->load_model("CartModel", $conn);
+        $this->__ordersModel    = $this->load_model("OrdersModel", $conn);
+        $this->__cartModel      = $this->load_model("CartModel", $conn);
     }
 
 
     public function createOrder()
     {
         try {
-            $user_id = $_SESSION['user']->id;
-            $cartItems = $_SESSION['cart_items'];
-            $totalAmount = $_POST['totalAmount'];
+            $user_id        = $_SESSION['user']->id;
+            $cartItems      = $_SESSION['cart_items'];
+            $totalAmount    = $_POST['totalAmount'];
 
             $orderId = $this->__ordersModel->createOrder($user_id, $cartItems, $totalAmount);
             if ($orderId > 0) {

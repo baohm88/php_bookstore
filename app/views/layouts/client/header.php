@@ -40,8 +40,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <div class="user-account-content">
                             <h4>Account</h4>
                             <hr>
-                            <p><a href="#"><i class="bi bi-person-circle"></i> Profile</a></p>
-                            <p><a href="http://localhost/php_bookstore/orders" class="<?= ($current_page == 'orders') ? 'active' : '' ?>"><i class="bi bi-journal-album"></i> Orders</a></p>
+                            <p><a href="http://localhost/php_bookstore/user/profile"><i class="bi bi-person-circle"></i> Your profile</a></p>
+                            <p><a href="http://localhost/php_bookstore/orders" class="<?= ($current_page == 'orders') ? 'active' : '' ?>"><i class="bi bi-journal-album"></i> Your orders</a></p>
                             <p><a href="http://localhost/php_bookstore/user/logout"><i class="bi bi-box-arrow-right"></i> Logout</a></p>
                         </div>
                     </li>
