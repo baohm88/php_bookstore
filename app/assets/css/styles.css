@@ -171,7 +171,7 @@ button:hover {
     color: black;
 }
 
-.sidenav .closebtn {
+.sidenav .closebtn1 {
     position: absolute;
     top: 0;
     right: 25px;
@@ -221,6 +221,10 @@ button:hover {
     max-width: 20rem;
     margin-left: 10px;
     width: 100%;
+}
+
+.book-details div {
+    margin: 5px 0;
 }
 
 .book-title {
@@ -335,7 +339,7 @@ button:hover {
 }
 
 .cart-summary {
-    width: 30%;
+    min-width: 400px;
     line-height: 2rem;
     background-color: var(--light);
     border-radius: 10px;
@@ -343,7 +347,8 @@ button:hover {
 }
 
 .cart-table {
-    width: 70%;
+    min-width: 500px;
+    width: 100%;
 }
 
 .cart-button {
@@ -588,6 +593,38 @@ tr:hover {
     color: white;
 }
 
+/* ALERTS */
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.closebtn {
+    margin-left: 10px;
+    color: var(--dark);
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.closebtn:hover {
+    background-color: var(--light);
+}
+
 /* MOBILE */
 @media screen and (max-width: 900px) {
     main {
@@ -601,9 +638,7 @@ tr:hover {
     .menu-icon {
         display: block;
     }
-}
 
-@media screen and (max-width: 600px) {
     .cart-container {
         flex-direction: column;
     }

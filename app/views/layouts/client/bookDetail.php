@@ -25,10 +25,16 @@ $book = $data['book'];
         </div>
       </div>
       <hr>
-      <p><i><?= $book->description ?></i></p>
+      <div>
+        <p><i><?= $book->description ?></i></p>
+      </div>
+
       <hr>
-      <p>Author: <?= $book->author ?></p>
-      <p>Category ID: <?= $book->category_id ?></p>
+      <div>
+        <p>Author: <?= $book->author ?></p>
+        <p>Category ID: <?= $book->category_id ?></p>
+      </div>
+
 
     </div>
   <?php else: ?>

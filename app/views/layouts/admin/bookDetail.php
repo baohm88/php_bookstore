@@ -17,11 +17,15 @@ $book = $data['book'];
     <p class="book-price">$<?= number_format($book->price_out, 2, '.', ',')  ?></p>
 
     <hr>
-    <p><i><?= $book->description ?></i></p>
-
+    <div>
+      <p><i><?= $book->description ?></i></p>
+    </div>
     <hr>
-    <p>Author: <?= $book->author ?></p>
-    <p>Category: <?= $book->category_name ?></p>
+    <div>
+      <p>Author: <?= $book->author ?></p>
+      <p>Category: <?= $book->category_name ?></p>
+    </div>
+
 
     <hr>
     <div>

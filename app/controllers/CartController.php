@@ -48,9 +48,14 @@ class CartController extends BaseController
     {
         $book_id    = $_REQUEST['book_id'];
         $quantity   = $_REQUEST['quantity'];
-        if (isset($_SESSION['cart']) && isset($_SESSION['cart'][$book_id])) {
-            $_SESSION['cart'][$book_id] = $quantity;
+        if ($quantity == 0) {
+            unset($_SESSION['cart'][$book_id]);
+        } else {
+            if (isset($_SESSION['cart']) && isset($_SESSION['cart'][$book_id])) {
+                $_SESSION['cart'][$book_id] = $quantity;
+            }
         }
+
         header('location: http://localhost/php_bookstore/cart');
     }
 

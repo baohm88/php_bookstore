@@ -88,12 +88,18 @@ function confirmDeleteCartItem(bookId) {
     }
 }
 
+
 function backToClientBooksList() {
     window.location.href = "http://localhost/php_bookstore/books";
 }
 
 function backToClientOrdersList() {
     window.location.href = "http://localhost/php_bookstore/orders";
+}
+
+function updateUserPassword() {
+    window.location.href =
+        "http://localhost/php_bookstore/user/update_user_password";
 }
 
 function updateCartItemQty(bookId) {
@@ -114,7 +120,7 @@ function closeNav() {
     document.body.style.backgroundColor = "rgb(245, 245, 247)";
 }
 
-// MODAL
+// EDIT PROFILE MODAL
 
 // Get modal and trigger elements
 const modal = document.getElementById("editProfileModal");
@@ -135,5 +141,33 @@ closeModalBtn.onclick = function () {
 window.onclick = function (event) {
     if (event.target === modal) {
         modal.style.display = "none";
+    }
+};
+
+// UPDATE PASSWORD MODAL
+
+// Get modal and trigger elements
+const updatePasswordModal = document.getElementById("updatePasswordModal");
+const openUpdatePasswordModalBtn = document.getElementById(
+    "openUpdatePasswordModalBtn"
+);
+const closeUpdatePasswordModalBtn = document.getElementById(
+    "closeUpdatePasswordModalBtn"
+);
+
+// Open modal when trigger button is clicked
+openUpdatePasswordModalBtn.onclick = function () {
+    updatePasswordModal.style.display = "flex"; // Show modal with flex layout (for centering)
+};
+
+// Close modal when close button is clicked
+closeUpdatePasswordModalBtn.onclick = function () {
+    updatePasswordModal.style.display = "none";
+};
+
+// Close modal if user clicks outside the modal content
+window.onclick = function (event) {
+    if (event.target === updatePasswordModal) {
+        updatePasswordModal.style.display = "none";
     }
 };

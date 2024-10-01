@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['user']) {
+if (isset($_SESSION['user'])) {
     $username = $_SESSION['user']->username;
 }
 
@@ -59,7 +59,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <main>
 
         <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="javascript:void(0)" class="closebtn1" onclick="closeNav()">&times;</a>
             <a href="http://localhost/php_bookstore/home" class="<?= ($current_page == 'home' || $current_page == 'index') ? 'active' : '' ?>"><i class="bi bi-house-heart-fill"></i> Home</a>
             <a href="http://localhost/php_bookstore/books" class="<?= ($current_page == 'books') ? 'active' : '' ?>"><i class="bi bi-book-fill"></i> Books</a>
             <a href="http://localhost/php_bookstore/orders" class="<?= ($current_page == 'orders') ? 'active' : '' ?>"><i class="bi bi-journal-album"></i> Orders</a>

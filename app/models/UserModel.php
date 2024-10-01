@@ -97,4 +97,22 @@ class UserModel
             echo $ex->getMessage();
         }
     }
+
+    public function updateUserPassword($user_id, $password)
+    {
+        try {
+            if (isset($this->__conn)) {
+                $sql = "UPDATE users 
+                        SET password = :password
+                        WHERE id = :user_id";
+                $stmt = $this->__conn->prepare($sql);
+                $stmt->bindParam("password", $password, PDO::PARAM_STR);
+                $stmt->bindParam("user_id", $user_id, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+            return null;
+        } catch (PDOException $ex) {
+            echo $ex->getMessage();
+        }
+    }
 }

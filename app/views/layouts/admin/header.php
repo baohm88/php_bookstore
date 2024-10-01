@@ -49,17 +49,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <!-- sidebar -->
     <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="javascript:void(0)" class="closebtn1" onclick="closeNav()">&times;</a>
 
-      <a href="http://localhost/php_bookstore/admin" class="nav-link <?= ($current_page == 'book' || $current_page == 'admin' || $current_page == 'index' || $current_page == 'edit_book') ? 'active' : '' ?>"><i class="bi bi-book-fill"></i> Books</a>
-      <a href="http://localhost/php_bookstore/admin/categories" class="nav-link <?= ($current_page == 'categories' || $current_page == 'edit_genre') ? 'active' : '' ?>"><i class="bi bi-journal-album"></i> Categories</a>
-      <a href="http://localhost/php_bookstore/admin/orders" class="nav-link <?= ($current_page == 'orders' || $current_page == 'edit_publisher') ? 'active' : '' ?>"><i class="bi bi-house-down-fill"></i> Orders</a>
+      <a href="http://localhost/php_bookstore/admin" class="<?= ($current_page == 'book' || $current_page == 'admin' || $current_page == 'index' || $current_page == 'edit_book') ? 'active' : '' ?>"><i class="bi bi-book-fill"></i> Books</a>
+      <a href="http://localhost/php_bookstore/admin/categories" class="<?= ($current_page == 'categories' || $current_page == 'edit_genre') ? 'active' : '' ?>"><i class="bi bi-journal-album"></i> Categories</a>
+      <a href="http://localhost/php_bookstore/admin/orders" class="<?= ($current_page == 'orders' || $current_page == 'edit_publisher') ? 'active' : '' ?>"><i class="bi bi-house-down-fill"></i> Orders</a>
 
 
       <?php if (isset($username)): ?>
-        <a href="http://localhost/php_bookstore/user/logout" class="nav-link"><button class="danger"><i class="bi bi-box-arrow-right"></i> Logout</button></a>
+        <a href="http://localhost/php_bookstore/user/logout" class=""><button class="danger"><i class="bi bi-box-arrow-right"></i> Logout</button></a>
       <?php else: ?>
-        <a href="http://localhost/php_bookstore/user/login" class="nav-link"><button class="success"><i class="bi bi-box-arrow-in-right"></i> Login</button></a>
+        <a href="http://localhost/php_bookstore/user/login" class=""><button class="success"><i class="bi bi-box-arrow-in-right"></i> Login</button></a>
       <?php endif ?>
     </div>
     <!-- sidebar -->

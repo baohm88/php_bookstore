@@ -1,12 +1,28 @@
 <?php
 
-$user = $data['user'];
+$user = $_SESSION['user'];
 $genders = ['male', 'female', 'not specified'];
 
+if (isset($data['error'])) {
+    $error = $data['error'];
+}
+
 ?>
+
+<?php if (isset($_SESSION['success_message'])): ?>
+    <div class="alert alert-success">
+
+        <span class="closebtn" onclick="this.parentElement.style.display='none';"><i class="bi bi-x"></i></span>
+        <p><?= htmlspecialchars($_SESSION['success_message']); ?></p>
+
+    </div>
+    <?php unset($_SESSION['success_message']); // Clear the success message after displaying 
+    ?>
+<?php endif; ?>
+
+
 <div class="profile-container">
     <div class="profile-header">
-        <!-- <img src="https://i.pinimg.com/736x/38/63/2e/38632eac71e6ed2d5240bdf499d936fe.jpg" alt="Profile Image"> -->
         <img src="<?= !empty($user->image_url)  ? $user->image_url : 'https://i.pinimg.com/736x/38/63/2e/38632eac71e6ed2d5240bdf499d936fe.jpg' ?>" alt="<?= $user->fullName ?? 'Nguyen Van A' ?>">
         <div>
             <h2><?= $user->fullName ?? 'Nguyen Van A' ?></h2>
@@ -77,7 +93,7 @@ $genders = ['male', 'female', 'not specified'];
 
     <div class="center">
         <button class="primary" id="openModalBtn"><i class="bi bi-pen-fill"></i> Edit profile</button>
-        <button class="warning" id="openModalBtn"><i class="bi bi-person-fill-lock"></i> Change Password</button>
+        <button class="warning" onclick="updateUserPassword()"><i class="bi bi-person-fill-lock"></i> Change Password</button>
     </div>
 
 
@@ -124,4 +140,8 @@ $genders = ['male', 'female', 'not specified'];
             </form>
         </div>
     </div>
+
+
+
+
 </div>
