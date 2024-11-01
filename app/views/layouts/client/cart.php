@@ -26,12 +26,12 @@ $totalAmount = $data['totalAmount'] ?? 0;
                         <?php foreach ($cart_items as $book): ?>
                             <tr>
                                 <td>
-                                    <a href="http://localhost/php_bookstore/books/book/?id=<?= $book->id ?>">
+                                    <a href="http://programmingbooks-store.free.nf/books/book/?id=<?= $book->id ?>">
                                         <img src="<?= $book->image_url ?>" alt="<?= $book->title ?>" class="book-image-cart">
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="http://localhost/php_bookstore/books/book/?id=<?= $book->id ?>">
+                                    <a href="http://programmingbooks-store.free.nf/books/book/?id=<?= $book->id ?>">
                                         <?= $book->title ?>
                                     </a>
                                 </td>
@@ -67,7 +67,7 @@ $totalAmount = $data['totalAmount'] ?? 0;
             <hr>
 
             <p>
-            <form action="http://localhost/php_bookstore/orders/createOrder/" method="POST">
+            <form action="http://programmingbooks-store.free.nf/orders/createOrder/" method="POST">
                 <input type="hidden" name="user_id" value="<?= $_SESSION['user']->id ?>" />
                 <input type="hidden" name="cartItems" value="<?= $cart_items ?>">
                 <input type="hidden" name="totalAmount" value="<?= $totalAmount ?>">

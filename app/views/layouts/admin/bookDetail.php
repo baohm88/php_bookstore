@@ -29,7 +29,7 @@ $book = $data['book'];
 
     <hr>
     <div>
-      <a href="http://localhost/php_bookstore/admin/edit_book/?id=<?= $book->id ?>"><button class="primary"><i class="bi bi-pen-fill"></i> Edit</button></a>
+      <a href="http://programmingbooks-store.free.nf/admin/edit_book/?id=<?= $book->id ?>"><button class="primary"><i class="bi bi-pen-fill"></i> Edit</button></a>
       <button class="danger" onclick="confirmDeleteBook(<?= $book->id ?>)"><i class="bi bi-trash3-fill"></i> Delete</button>
     </div>
   </div>

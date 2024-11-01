@@ -17,7 +17,7 @@ $book = $data['book'];
           <p class="book-price">$<?= number_format($book->price_out, 2, '.', ',')  ?></p>
         </div>
         <div>
-          <form action="http://localhost/php_bookstore/cart/add_to_cart/" method="POST">
+          <form action="http://programmingbooks-store.free.nf/cart/add_to_cart/" method="POST">
             <input type="hidden" name="book_id" value="<?= $book->id ?>">
             <input type="hidden" name="quantity" value=1>
             <p><button class="cart-button">Add to Cart</button></p>

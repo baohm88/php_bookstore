@@ -24,14 +24,14 @@ class UserController extends BaseController
                 // save user to session
                 $_SESSION["user"] = $user;
                 if ($role == "admin") {
-                    header("Location: http://localhost/php_bookstore/admin");
+                    header("Location: http://programmingbooks-store.free.nf/admin");
                 } else {
                     // role = client
-                    header("Location: http://localhost/php_bookstore/home");
+                    header("Location: http://programmingbooks-store.free.nf/home");
                 }
             } else {
                 // not logged in yet -> redirect user to login page
-                // header("Location: http://localhost/php_bookstore/user/login");
+                // header("Location: http://programmingbooks-store.free.nf/user/login");
                 $data['error'] = 'Wrong username and/or password.';
                 $this->view("client/clientLayout.php", $data);
             }
@@ -63,11 +63,11 @@ class UserController extends BaseController
                 $this->__userModel->updateUserProfile($user_id, $image_url, $fullName, $bio, $gender, $birthday, $email, $shipping_address);
                 $user = $this->__userModel->getUserByUsername($_SESSION['user']->username);
                 $_SESSION["user"] = $user;
-                header("Location: http://localhost/php_bookstore/user/profile");
+                header("Location: http://programmingbooks-store.free.nf/user/profile");
             }
         } else {
             // Redirect to login if no session exists
-            header("Location: http://localhost/php_bookstore/user/login");
+            header("Location: http://programmingbooks-store.free.nf/user/login");
             exit;
         }
     }
@@ -126,7 +126,7 @@ class UserController extends BaseController
             $this->__userModel->updateUserPassword($user_id, $new_password);
             // Set success message and redirect to profile page
             $_SESSION['success_message'] = "Password updated successfully!";
-            header("Location: http://localhost/php_bookstore/user/profile");
+            header("Location: http://programmingbooks-store.free.nf/user/profile");
             exit;
 
             // $this->view("client/clientLayout.php", [
@@ -151,14 +151,14 @@ class UserController extends BaseController
 
             if ($role == "admin") {
                 // if role = admin -> redirect to login
-                header("Location: http://localhost/php_bookstore/user/login");
+                header("Location: http://programmingbooks-store.free.nf/user/login");
             } else {
                 // if role = client -> redirect to home page
-                header("Location: http://localhost/php_bookstore/home/index");
+                header("Location: http://programmingbooks-store.free.nf/home/index");
             }
         } else {
             // not logged in -> redirect user to home page
-            header("Location: http://localhost/php_bookstore/home/index");
+            header("Location: http://programmingbooks-store.free.nf/home/index");
         }
     }
 
@@ -195,7 +195,7 @@ class UserController extends BaseController
                 } else {
                     // save new user to db
                     $this->__userModel->registerNewUser($username, $password);
-                    header("Location: http://localhost/php_bookstore/user/login");
+                    header("Location: http://programmingbooks-store.free.nf/user/login");
                 }
             }
         }

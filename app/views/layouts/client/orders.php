@@ -27,7 +27,7 @@ $user_orders = $data['user_orders'] ?? '';
           <td><?php echo date('d/m/Y', strtotime($order->order_date))  ?></td>
           <td>$<?= $order->total ?></td>
           <td><button class="<?= $order->status == 'completed' ? 'completed' : ($order->status == 'pending' ? 'pending' : 'cancelled') ?>"><?= $order->status ?></button></td>
-          <td><a href="http://localhost/php_bookstore/orders/order/?id=<?= $order->id ?>"><button class="success"><i class="bi bi-eye-fill"></i> </button></a></td>
+          <td><a href="http://programmingbooks-store.free.nf/orders/order/?id=<?= $order->id ?>"><button class="success"><i class="bi bi-eye-fill"></i> </button></a></td>
         </tr>
 
       <?php endforeach ?>

@@ -7,7 +7,8 @@ function confirmDeleteBook(bookId) {
 
     if (userConfirmed) {
         window.location.href =
-            "http://localhost/php_bookstore/admin/delete_book/?id=" + bookId;
+            "http://programmingbooks-store.free.nf/admin/delete_book/?id=" +
+            bookId;
     }
 }
 
@@ -18,7 +19,7 @@ function confirmDeleteAuthor(authorId) {
 
     if (userConfirmed) {
         window.location.href =
-            "http://localhost/php_bookstore/admin/delete_author/?id=" +
+            "http://programmingbooks-store.free.nf/admin/delete_author/?id=" +
             authorId;
     }
 }
@@ -32,47 +33,50 @@ function confirmDeleteCategory(categoryId) {
 
     if (userConfirmed) {
         window.location.href =
-            "http://localhost/php_bookstore/admin/delete_category/?id=" +
+            "http://programmingbooks-store.free.nf/admin/delete_category/?id=" +
             categoryId;
     }
 }
 
 function addNewBook() {
-    window.location.href = "http://localhost/php_bookstore/admin/edit_book";
+    window.location.href =
+        "http://programmingbooks-store.free.nf/admin/edit_book";
 }
 
 function backToBooksList() {
-    window.location.href = "http://localhost/php_bookstore/admin";
+    window.location.href = "http://programmingbooks-store.free.nf/admin";
 }
 
 function addNewCategory() {
-    window.location.href = "http://localhost/php_bookstore/admin/edit_category";
+    window.location.href =
+        "http://programmingbooks-store.free.nf/admin/edit_category";
 }
 
 function backToCategoriesList() {
-    window.location.href = "http://localhost/php_bookstore/admin/categories";
+    window.location.href =
+        "http://programmingbooks-store.free.nf/admin/categories";
 }
 
 function backToAdminOrdersList() {
-    window.location.href = "http://localhost/php_bookstore/admin/orders";
+    window.location.href = "http://programmingbooks-store.free.nf/admin/orders";
 }
 
 function updateCategoryName(categoryId) {
     if (this.event.key === "Enter") {
         const categoryName = this.event.target.value; // Get the input value
-        window.location.href = `http://localhost/php_bookstore/admin/update_category/?id=${categoryId}&name=${categoryName}`;
+        window.location.href = `http://programmingbooks-store.free.nf/admin/update_category/?id=${categoryId}&name=${categoryName}`;
     }
 }
 
 function updateOrderStatus(orderId) {
-    window.location.href = `http://localhost/php_bookstore/admin/update_order_status/?id=${orderId}&status=${this.event.target.value}`;
+    window.location.href = `http://programmingbooks-store.free.nf/admin/update_order_status/?id=${orderId}&status=${this.event.target.value}`;
 }
 
 function updateBookStatus(bookId) {
     console.log("book id" + bookId);
     console.log("status: " + this.event.target.value);
 
-    window.location.href = `http://localhost/php_bookstore/admin/update_book_status/?id=${bookId}&status=${this.event.target.value}`;
+    window.location.href = `http://programmingbooks-store.free.nf/admin/update_book_status/?id=${bookId}&status=${this.event.target.value}`;
 }
 
 // FOR USERS
@@ -83,29 +87,28 @@ function confirmDeleteCartItem(bookId) {
 
     if (userConfirmed) {
         window.location.href =
-            "http://localhost/php_bookstore/cart/delete_from_cart/?id=" +
+            "http://programmingbooks-store.free.nf/cart/delete_from_cart/?id=" +
             bookId;
     }
 }
 
-
 function backToClientBooksList() {
-    window.location.href = "http://localhost/php_bookstore/books";
+    window.location.href = "http://programmingbooks-store.free.nf/books";
 }
 
 function backToClientOrdersList() {
-    window.location.href = "http://localhost/php_bookstore/orders";
+    window.location.href = "http://programmingbooks-store.free.nf/orders";
 }
 
 function updateUserPassword() {
     window.location.href =
-        "http://localhost/php_bookstore/user/update_user_password";
+        "http://programmingbooks-store.free.nf/user/update_user_password";
 }
 
 function updateCartItemQty(bookId) {
     if (this.event.key === "Enter") {
         const newQty = this.event.target.value; // Get the input value
-        window.location.href = `http://localhost/php_bookstore/cart/update_cart/?book_id=${bookId}&quantity=${newQty}`;
+        window.location.href = `http://programmingbooks-store.free.nf/cart/update_cart/?book_id=${bookId}&quantity=${newQty}`;
     }
 }
 

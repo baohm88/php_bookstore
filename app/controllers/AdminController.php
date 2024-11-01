@@ -115,7 +115,7 @@ class AdminController extends BaseController
                 $this->__bookModel->saveBookToDB($title, $author, $description, $category_id, $price_in, $price_out, $stock_qty, $image_url, $status);
             }
 
-            header("Location: http://localhost/php_bookstore/admin");
+            header("Location: http://programmingbooks-store.free.nf/admin");
         }
     }
 
@@ -125,14 +125,14 @@ class AdminController extends BaseController
         $id         = trim($_REQUEST['id']);
         $status     = trim($_REQUEST['status']);
         $this->__bookModel->updateBookStatusById($id, $status);
-        header("Location: http://localhost/php_bookstore/admin");
+        header("Location: http://programmingbooks-store.free.nf/admin");
     }
 
     function delete_book()
     {
         $bookId = $_REQUEST['id'];
         $this->__bookModel->deleteBookById($bookId);
-        header("Location: http://localhost/php_bookstore/admin");
+        header("Location: http://programmingbooks-store.free.nf/admin");
     }
 
 
@@ -162,7 +162,7 @@ class AdminController extends BaseController
         $id     = trim($_REQUEST['id']);
         $name   = trim($_REQUEST['name']);
         $this->__categoryModel->updateCategoryById($id, $name);
-        header("Location: http://localhost/php_bookstore/admin/categories");
+        header("Location: http://programmingbooks-store.free.nf/admin/categories");
     }
 
 
@@ -206,7 +206,7 @@ class AdminController extends BaseController
                 $this->__categoryModel->saveCategoryToDB($name);
             }
 
-            header("Location: http://localhost/php_bookstore/admin/categories");
+            header("Location: http://programmingbooks-store.free.nf/admin/categories");
         }
     }
 
@@ -215,7 +215,7 @@ class AdminController extends BaseController
     {
         $categoryId         = trim($_REQUEST['id']);
         $data['category']   = $this->__categoryModel->deleteCategoryById($categoryId);
-        header("Location: http://localhost/php_bookstore/admin/categories");
+        header("Location: http://programmingbooks-store.free.nf/admin/categories");
     }
 
 
@@ -257,6 +257,6 @@ class AdminController extends BaseController
         $id         = trim($_REQUEST['id']);
         $status     = trim($_REQUEST['status']);
         $this->__orderModel->updateOrderStatus($id, $status);
-        header("Location: http://localhost/php_bookstore/admin/orders");
+        header("Location: http://programmingbooks-store.free.nf/admin/orders");
     }
 }

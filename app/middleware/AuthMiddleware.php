@@ -31,7 +31,7 @@ class AuthMiddleware
         }
       } else {
         // $_SESSION["user"] is unset -> not logged in -> redirect user to login page
-        header("Location: http://localhost/php_bookstore/user/login");
+        header("Location: http://programmingbooks-store.free.nf/user/login");
       }
     } else {
       // other routes (controllers) which are not 'admin'
@@ -41,7 +41,7 @@ class AuthMiddleware
         // if (in_array($controller . "/" . $action, $this->__paths)) {
         if (in_array($controller, $this->__paths)) {
           // redirect user to login page
-          header("Location: http://localhost/php_bookstore/user/login");
+          header("Location: http://programmingbooks-store.free.nf/user/login");
         }
       }
     }

@@ -40,7 +40,7 @@ class CartController extends BaseController
         if (isset($_SESSION['cart']) && isset($_SESSION['cart'][$book_id])) {
             unset($_SESSION['cart'][$book_id]);
         }
-        header('location: http://localhost/php_bookstore/cart');
+        header('location: http://programmingbooks-store.free.nf/cart');
     }
 
 
@@ -56,7 +56,7 @@ class CartController extends BaseController
             }
         }
 
-        header('location: http://localhost/php_bookstore/cart');
+        header('location: http://programmingbooks-store.free.nf/cart');
     }
 
     public function add_to_cart()
@@ -80,6 +80,6 @@ class CartController extends BaseController
                 $_SESSION['cart'] = [$book_id => $quantity];
             }
         }
-        header('location: http://localhost/php_bookstore/cart');
+        header('location: http://programmingbooks-store.free.nf/cart');
     }
 }

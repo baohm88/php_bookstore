@@ -23,7 +23,7 @@ class OrdersController extends BaseController
                 $_SESSION['totalCartItems'] = null;
                 $_SESSION['cart'] = null;
                 // redirect the user to orders page
-                header('location: http://localhost/php_bookstore/orders');
+                header('location: http://programmingbooks-store.free.nf/orders');
             } else {
                 echo "Error creating order<br>";
             }

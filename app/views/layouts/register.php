@@ -18,5 +18,5 @@ if (isset($data["error"])) {
 
   </p>
   <br><br>
-  <p>Have no account yet? <a href="http://localhost/php_bookstore/user/login">Login</a> here!</p>
+  <p>Have no account yet? <a href="http://programmingbooks-store.free.nf/user/login">Login</a> here!</p>
 </form>

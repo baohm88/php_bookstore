@@ -25,12 +25,12 @@ $price_out      = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
     <?php if (!empty($books)): ?>
         <?php foreach ($books as $book): ?>
             <div class="book-card center">
-                <a href="http://localhost/php_bookstore/books/book/?id=<?= $book->id ?>">
+                <a href="http://programmingbooks-store.free.nf/books/book/?id=<?= $book->id ?>">
                     <img src="<?= $book->image_url ?>" alt="<?= $book->$title ?>" class="book-image">
                     <h4 class="book-title"><?= $book->title ?></h4>
                 </a>
                 <p class="book-price">$<?= number_format($book->price_out, 2, '.', ',')  ?></p>
-                <form action="http://localhost/php_bookstore/cart/add_to_cart/" method="POST">
+                <form action="http://programmingbooks-store.free.nf/cart/add_to_cart/" method="POST">
                     <input type="hidden" name="book_id" value="<?= $book->id ?>">
                     <input type="hidden" name="quantity" value=1>
                     <p><button class="cart-button">Add to Cart</button></p>
@@ -47,7 +47,7 @@ $price_out      = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
 <br>
 <div class="center">
     <?php if ($page > 1): ?>
-        <a href="http://localhost/php_bookstore/books/?page=<?= $page - 1 ?>&title=<?= urlencode($title) ?>&stock_qty=<?= urlencode($stock_qty) ?>&price_in=<?= urlencode($price_in) ?>&price_out=<?= urlencode($price_out) ?>">
+        <a href="http://programmingbooks-store.free.nf/books/?page=<?= $page - 1 ?>&title=<?= urlencode($title) ?>&stock_qty=<?= urlencode($stock_qty) ?>&price_in=<?= urlencode($price_in) ?>&price_out=<?= urlencode($price_out) ?>">
             <i class="bi bi-caret-left-fill" style="font-weight: 900;"></i>
         </a>
     <?php endif; ?>
@@ -55,7 +55,7 @@ $price_out      = isset($_GET['price_out']) ? trim($_GET['price_out']) : '';
     Page <?= $page ?> of <?= $totalPages ?>
 
     <?php if ($page < $totalPages): ?>
-        <a href="http://localhost/php_bookstore/books/?page=<?= $page + 1 ?>&title=<?= urlencode($title) ?>&stock_qty=<?= urlencode($stock_qty) ?>&price_in=<?= urlencode($price_in) ?>&price_out=<?= urlencode($price_out) ?>">
+        <a href="http://programmingbooks-store.free.nf/books/?page=<?= $page + 1 ?>&title=<?= urlencode($title) ?>&stock_qty=<?= urlencode($stock_qty) ?>&price_in=<?= urlencode($price_in) ?>&price_out=<?= urlencode($price_out) ?>">
             <i class="bi bi-caret-right-fill" style="font-weight: 900;"></i>
         </a>
     <?php endif; ?>

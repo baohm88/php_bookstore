@@ -5,7 +5,7 @@
 </footer>
 
 
-<script src="http://localhost/php_bookstore/app/assets/js/main.js"></script>
+<script src="http://programmingbooks-store.free.nf/app/assets/js/main.js"></script>
 </body>
 
 </html>
